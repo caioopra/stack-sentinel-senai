@@ -6,8 +6,8 @@ uma tool tipada (`fetch_ticket_context`) e um MCP Server mínimo expondo essa to
 ## Rodar
 
 ```bash
-uv run uvicorn stack_sentinel.mock_api:app --port 8000   # sobe a mock API
-uv run mcp dev src/stack_sentinel/server.py              # abre o MCP Inspector pra chamar a tool
+uv run uvicorn stack_sentinel.mock.api:app --port 8000   # sobe a mock API
+uv run mcp dev src/stack_sentinel/mcp/server.py          # abre o MCP Inspector pra chamar a tool
 uv run pytest                                            # roda os testes
 ```
 
