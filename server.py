@@ -25,5 +25,23 @@ def fetch_ticket_context(ticket_id: str) -> TicketContext:
     return TicketContext(**r.json())
 
 
+class BuildStatus(BaseModel):
+    service: str
+    status: str
+    branch: str
+    commit: str
+
+
+@mcp.tool()
+def fetch_build_status(build_id: str) -> BuildStatus:
+    """Retorna service, status, branch e commit de um build."""
+    try:
+        r = httpx.get(f"{BASE}/builds/{build_id}", timeout=5)
+        r.raise_for_status()
+    except httpx.HTTPError:
+        raise ValueError(f"build {build_id} indisponível")
+    return BuildStatus(**r.json())
+
+
 if __name__ == "__main__":
     mcp.run()
