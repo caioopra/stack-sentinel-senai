@@ -43,5 +43,13 @@ def fetch_build_status(build_id: str) -> BuildStatus:
     return BuildStatus(**r.json())
 
 
+@mcp.resource("docs://severity-policy")
+def severity_policy() -> str:
+    """Política de severidade de incidentes (contexto só-leitura)."""
+    r = httpx.get(f"{BASE}/docs/severity-policy", timeout=5)
+    r.raise_for_status()
+    return r.json()["content"]
+
+
 if __name__ == "__main__":
     mcp.run()
