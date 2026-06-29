@@ -22,19 +22,19 @@ A base da API usada pelas tools vem de `STACK_SENTINEL_API`
 ## Demos da Aula 2
 
 ```bash
-uv run mcp dev src/stack_sentinel/mcp/server.py   # Demo 1: Inspector (Resources/Prompts)
-uv run python -m stack_sentinel.graph_min         # Demo 2: grafo mínimo
-uv run pytest tests/test_classify.py -v           # Demo 3: classify com FakeLLM
-uv run pytest                                     # tudo verde
+uv run mcp dev src/stack_sentinel/mcp/server.py    # Demo 1: Inspector (Resources/Prompts)
+uv run python -m stack_sentinel.agent.graph_min    # Demo 2: grafo mínimo
+uv run pytest tests/test_classify.py -v            # Demo 3: classify com FakeLLM
+uv run pytest                                      # tudo verde
 ```
 
 - **Demo 1** — `stack_sentinel/mcp/server.py` expõe a tool `fetch_build_status`, o resource
   `docs://severity-policy` e o prompt `incident_triage` (precisa da mock API no ar).
-- **Demo 2** — `stack_sentinel/graph_min.py`: grafo mínimo do LangGraph (`START → echo → END`)
+- **Demo 2** — `stack_sentinel/agent/graph_min.py`: grafo mínimo do LangGraph (`START → echo → END`)
   que imprime o state final.
-- **Demo 3** — `classify_intent_node` (em `stack_sentinel/classify.py`) usa structured output
+- **Demo 3** — `classify_intent_node` (em `stack_sentinel/agent/classify.py`) usa structured output
   (`IntentResult`) pra classificar a intenção. Os testes injetam o `FakeClassifier`
-  (`stack_sentinel/fakes.py`), que espelha a interface do chat model real, sem exigir chave de API.
+  (`stack_sentinel/agent/fakes.py`), que espelha a interface do chat model real, sem exigir chave de API.
 
 ### LLM real (opcional)
 

@@ -1,4 +1,4 @@
-from stack_sentinel.classify import IntentResult
+from stack_sentinel.agent.classify import IntentResult
 
 
 class FakeClassifier:

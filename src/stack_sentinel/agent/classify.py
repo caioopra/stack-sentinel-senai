@@ -1,6 +1,6 @@
 from typing import Literal
 from pydantic import BaseModel, Field
-from stack_sentinel.agent_state import AgentState
+from stack_sentinel.agent.state import AgentState
 
 
 class IntentResult(BaseModel):

@@ -1,6 +1,6 @@
-from stack_sentinel.agent_state import AgentState
-from stack_sentinel.classify import classify_intent_node
-from stack_sentinel.fakes import FakeClassifier
+from stack_sentinel.agent.state import AgentState
+from stack_sentinel.agent.classify import classify_intent_node
+from stack_sentinel.agent.fakes import FakeClassifier
 
 llm = FakeClassifier()
 
