@@ -3,12 +3,14 @@
 Hub de investigação técnica para devs. Serviço mockado (FastAPI), tools tipadas,
 um MCP Server e os primeiros nós de um agente em LangGraph.
 
+O código vive no pacote `src/stack_sentinel/`.
+
 ## Rodar
 
 ```bash
-uv run uvicorn mock_api:app --port 8000   # sobe a mock API (necessária p/ as tools/resource)
-uv run mcp dev server.py                  # abre o MCP Inspector pra chamar a tool
-uv run pytest                             # roda os testes
+uv run uvicorn stack_sentinel.mock_api:app --port 8000   # sobe a mock API (necessária p/ as tools/resource)
+uv run mcp dev src/stack_sentinel/server.py              # abre o MCP Inspector pra chamar a tool
+uv run pytest                                            # roda os testes
 ```
 
 Os testes sobem a mock API sozinhos (uvicorn em background), então
@@ -20,19 +22,19 @@ A base da API usada pelas tools vem de `STACK_SENTINEL_API`
 ## Demos da Aula 2
 
 ```bash
-uv run mcp dev server.py                  # Demo 1: Inspector (Resources/Prompts)
-uv run python graph_min.py                # Demo 2: grafo mínimo
-uv run pytest tests/test_classify.py -v   # Demo 3: classify com FakeLLM
-uv run pytest                             # tudo verde
+uv run mcp dev src/stack_sentinel/server.py   # Demo 1: Inspector (Resources/Prompts)
+uv run python -m stack_sentinel.graph_min     # Demo 2: grafo mínimo
+uv run pytest tests/test_classify.py -v       # Demo 3: classify com FakeLLM
+uv run pytest                                 # tudo verde
 ```
 
-- **Demo 1** — `server.py` expõe a tool `fetch_build_status`, o resource
+- **Demo 1** — `stack_sentinel/server.py` expõe a tool `fetch_build_status`, o resource
   `docs://severity-policy` e o prompt `incident_triage` (precisa da mock API no ar).
-- **Demo 2** — `graph_min.py`: grafo mínimo do LangGraph (`START → echo → END`)
+- **Demo 2** — `stack_sentinel/graph_min.py`: grafo mínimo do LangGraph (`START → echo → END`)
   que imprime o state final.
-- **Demo 3** — `classify_intent_node` (em `classify.py`) usa structured output
+- **Demo 3** — `classify_intent_node` (em `stack_sentinel/classify.py`) usa structured output
   (`IntentResult`) pra classificar a intenção. Os testes injetam o `FakeClassifier`
-  (`fakes.py`), que espelha a interface do chat model real, sem exigir chave de API.
+  (`stack_sentinel/fakes.py`), que espelha a interface do chat model real, sem exigir chave de API.
 
 ### LLM real (opcional)
 

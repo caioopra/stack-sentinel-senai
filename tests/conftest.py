@@ -27,10 +27,10 @@ os.environ["STACK_SENTINEL_API"] = _BASE
 @pytest.fixture(scope="session", autouse=True)
 def mock_api_server():
     """Sobe a mock API (uvicorn) num thread daemon e espera ela responder."""
-    from mock_api import app
+    from stack_sentinel.mock_api import app
 
     # Reafirma a base no módulo server, caso ele já tenha sido importado.
-    import server
+    from stack_sentinel import server
     server.BASE = _BASE
 
     config = uvicorn.Config(app, host="127.0.0.1", port=_PORT, log_level="warning")
