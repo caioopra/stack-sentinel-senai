@@ -8,8 +8,8 @@ O código vive no pacote `src/stack_sentinel/`.
 ## Rodar
 
 ```bash
-uv run uvicorn stack_sentinel.mock_api:app --port 8000   # sobe a mock API (necessária p/ as tools/resource)
-uv run mcp dev src/stack_sentinel/server.py              # abre o MCP Inspector pra chamar a tool
+uv run uvicorn stack_sentinel.mock.api:app --port 8000   # sobe a mock API (necessária p/ as tools/resource)
+uv run mcp dev src/stack_sentinel/mcp/server.py          # abre o MCP Inspector pra chamar a tool
 uv run pytest                                            # roda os testes
 ```
 
@@ -22,13 +22,13 @@ A base da API usada pelas tools vem de `STACK_SENTINEL_API`
 ## Demos da Aula 2
 
 ```bash
-uv run mcp dev src/stack_sentinel/server.py   # Demo 1: Inspector (Resources/Prompts)
-uv run python -m stack_sentinel.graph_min     # Demo 2: grafo mínimo
-uv run pytest tests/test_classify.py -v       # Demo 3: classify com FakeLLM
-uv run pytest                                 # tudo verde
+uv run mcp dev src/stack_sentinel/mcp/server.py   # Demo 1: Inspector (Resources/Prompts)
+uv run python -m stack_sentinel.graph_min         # Demo 2: grafo mínimo
+uv run pytest tests/test_classify.py -v           # Demo 3: classify com FakeLLM
+uv run pytest                                     # tudo verde
 ```
 
-- **Demo 1** — `stack_sentinel/server.py` expõe a tool `fetch_build_status`, o resource
+- **Demo 1** — `stack_sentinel/mcp/server.py` expõe a tool `fetch_build_status`, o resource
   `docs://severity-policy` e o prompt `incident_triage` (precisa da mock API no ar).
 - **Demo 2** — `stack_sentinel/graph_min.py`: grafo mínimo do LangGraph (`START → echo → END`)
   que imprime o state final.
