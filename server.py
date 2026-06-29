@@ -1,8 +1,10 @@
 import os
 import httpx
 from pydantic import BaseModel
+from mcp.server.fastmcp import FastMCP
 
 BASE = os.getenv("STACK_SENTINEL_API", "http://localhost:8000")
+mcp = FastMCP("stack-sentinel")
 
 class TicketContext(BaseModel):
     summary: str
@@ -10,6 +12,7 @@ class TicketContext(BaseModel):
     service: str
     status: str
 
+@mcp.tool()
 def fetch_ticket_context(ticket_id: str) -> TicketContext:
     """Retorna summary, severity, service e status de um ticket."""
     try:
@@ -18,3 +21,6 @@ def fetch_ticket_context(ticket_id: str) -> TicketContext:
     except httpx.HTTPError:
         raise ValueError(f"ticket {ticket_id} indisponível")
     return TicketContext(**r.json())
+
+if __name__ == "__main__":
+    mcp.run()
