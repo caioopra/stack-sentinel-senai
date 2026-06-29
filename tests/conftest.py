@@ -30,7 +30,7 @@ def mock_api_server():
     from stack_sentinel.mock.api import app
 
     # Reafirma a base no módulo server, caso ele já tenha sido importado.
-    from stack_sentinel.mcp import server
+    from stack_sentinel.mcp_server import server
     server.BASE = _BASE
 
     config = uvicorn.Config(app, host="127.0.0.1", port=_PORT, log_level="warning")

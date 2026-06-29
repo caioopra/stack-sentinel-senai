@@ -1,5 +1,5 @@
 import pytest
-from stack_sentinel.mcp.server import fetch_ticket_context
+from stack_sentinel.mcp_server.server import fetch_ticket_context
 
 def test_ticket_existente():
     ctx = fetch_ticket_context("TCK-101")
