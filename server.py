@@ -51,5 +51,15 @@ def severity_policy() -> str:
     return r.json()["content"]
 
 
+@mcp.prompt()
+def incident_triage(user_question: str, available_context: str) -> str:
+    """Template reutilizável de triagem de incidente."""
+    return (
+        "Faca a triagem do incidente. Resuma o problema, cite a severidade "
+        "se houver evidencia e sugira o proximo passo. Nao invente dados.\n"
+        f"Pergunta: {user_question}\nContexto: {available_context}"
+    )
+
+
 if __name__ == "__main__":
     mcp.run()
